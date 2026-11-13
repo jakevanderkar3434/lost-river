@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>html{color-scheme:light dark}body{margin:0;font-family:system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>Lost River Valley Getaway</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky day-tab nav over a single scrolling column; photo leads each section; tables for schedules. */
+:root{
+  --bg:#f6f4ee; --surface:#ffffff; --fg:#1d2420; --muted:#5c665f; --line:#e1ddd2;
+  --pine:#1f3b2e; --pine-ink:#ffffff; --moss:#e7efe6; --accent:#2f6b4a; --accent-soft:#dbe9de;
+  --display:"Fraunces",Georgia,serif; --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r:12px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#141917; --surface:#1c2320; --fg:#e8ebe6; --muted:#9aa59d; --line:#2a332e;
+  --pine:#0f1f17; --pine-ink:#f0f3ee; --moss:#1e2a24; --accent:#7fc29b; --accent-soft:#223a2d; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#141917; --surface:#1c2320; --fg:#e8ebe6; --muted:#9aa59d; --line:#2a332e;
+  --pine:#0f1f17; --pine-ink:#f0f3ee; --moss:#1e2a24; --accent:#7fc29b; --accent-soft:#223a2d; color-scheme:dark }
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 35%,transparent)}
+a:hover{border-bottom-color:var(--accent)}
+img{max-width:100%;display:block}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--pine)}
+
+/* hero */
+.hero{position:relative;background:var(--pine);color:var(--pine-ink)}
+.hero img{width:100%;aspect-ratio:21/9;object-fit:cover;opacity:.92}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,26,18,.05) 30%,rgba(10,26,18,.88) 100%)}
+.hero .text{position:absolute;left:0;right:0;bottom:0;padding-block:28px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.hero .inner{max-width:1040px;margin:0 auto}
+.kicker{font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.8;margin:0 0 6px}
+h1{font-family:var(--display);font-weight:500;font-size:clamp(34px,6vw,60px);line-height:1;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:18px}
+.facts a{color:inherit;border-bottom:1px solid rgba(255,255,255,.4)}
+.facts div{border-left:2px solid rgba(255,255,255,.4);padding:4px 0 4px 12px;font-size:13px}
+.facts b{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.75;font-weight:600;margin-bottom:2px}
+
+/* nav */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);border-bottom:1px solid var(--line)}
+nav .inner{max-width:1040px;margin:0 auto;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-block:8px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+nav .inner::-webkit-scrollbar{display:none}
+nav button{flex:0 0 auto;border:0;background:transparent;font:inherit;cursor:pointer;padding:7px 12px;border-radius:999px;font-size:13px;font-weight:500;color:var(--muted);white-space:nowrap;-webkit-tap-highlight-color:transparent}
+nav button:hover{color:var(--fg);background:var(--moss)}
+nav button.on{background:var(--pine);color:var(--pine-ink)}
+
+/* page */
+main{max-width:1040px;margin:0 auto;padding-block:8px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{padding-block:36px 8px;scroll-margin-top:64px}
+section+section{border-top:1px solid var(--line)}
+.day{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+h2{font-family:var(--display);font-weight:500;font-size:30px;line-height:1.1;margin:0;letter-spacing:-.01em}
+.date{font-size:13px;color:var(--muted);font-weight:500}
+.sub{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:6px 0 0}
+.lead{max-width:68ch;font-size:16px;margin:14px 0 18px;color:var(--fg)}
+figure{margin:0 0 18px}
+figure img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--r)}
+figure.wide img{aspect-ratio:21/9}
+figcaption{font-size:12px;color:var(--muted);margin-top:6px}
+h3{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:22px 0 8px}
+p{margin:0 0 12px;max-width:72ch}
+ul{margin:0 0 12px;padding-left:20px;max-width:72ch}
+li{margin-bottom:4px}
+.tw{overflow-x:auto;margin:0 0 14px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:10px 14px;border-bottom:1px solid var(--line);font-weight:600}
+td{padding:11px 14px;vertical-align:top;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600;color:var(--fg);white-space:nowrap}
+table.sched td:first-child{width:110px;font-variant-numeric:tabular-nums}
+table.wrap td:first-child{white-space:normal;min-width:150px}
+table.cost td:nth-child(2){font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.total td{font-weight:600;background:var(--moss)}
+.note{background:var(--moss);border-radius:var(--r);padding:14px 16px;max-width:72ch;margin:0 0 14px}
+.note b{color:var(--accent)}
+footer{max-width:1040px;margin:0 auto;padding-block:16px 32px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+/* phone: tables become stacked cards, bigger tap targets */
+@media (max-width:640px){
+  body{font-size:16px}
+  h2{font-size:28px}
+  .hero img{aspect-ratio:4/5;object-position:center 40%}
+  .hero .text{padding-block:22px}
+  .facts{grid-template-columns:1fr;gap:8px 12px}
+  .facts div{font-size:13px;padding-left:10px}
+  nav button{padding:10px 14px;font-size:14px}
+  section{scroll-margin-top:60px}
+  .lead{font-size:16px}
+  figure img{aspect-ratio:4/3;border-radius:10px}
+  figure.wide img{aspect-ratio:16/9}
+  .tw{border:0;background:transparent;overflow:visible}
+  table,tbody,tr,td,th{display:block;width:100%}
+  thead,tr:has(th){display:none}
+  table{font-size:15px}
+  tr{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:0 0 10px}
+  td{padding:0;border:0;white-space:normal!important;width:auto!important;min-width:0!important}
+  td+td{margin-top:6px}
+  td[data-label]:not(:first-child)::before{content:attr(data-label);display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:2px}
+  td:first-child{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  table.sched td:first-child{font-variant-numeric:tabular-nums}
+  table.sched td[data-label]:not(:first-child)::before,table.two td[data-label]:not(:first-child)::before,.tw.dist td[data-label]:not(:first-child)::before{display:none}
+  table.sched td+td{margin-top:4px;font-weight:400}
+  tr.total{background:var(--moss)}
+  tr.total td{background:transparent}
+  .tw.dist tr:has(th){display:none}
+  .tw.dist tr{display:flex;justify-content:space-between;gap:12px;padding:10px 14px}
+  .tw.dist td{margin:0}
+  .tw.dist td:first-child{text-transform:none;letter-spacing:0;font-size:15px;color:var(--fg)}
+  .tw.dist td+td{font-variant-numeric:tabular-nums;color:var(--muted);text-align:right;white-space:nowrap!important}
+}
+</style>
+
+</head>
+<body>
+<header class="hero">
+  <img src="mainroom.jpg" alt="The cabin's main room: log beams, loft, leather couch, and the kitchen beyond">
+  <div class="shade"></div>
+  <div class="text"><div class="inner">
+    <p class="kicker">Birthday trip · Nov 15 to 18, 2026</p>
+    <h1>Lost River Valley, WV</h1>
+    <div class="facts">
+      <div><b>When</b>Sun Nov 15 to Wed Nov 18</div>
+      <div><b>Where</b><a href="https://www.google.com/maps/search/?api=1&amp;query=709+Wildlife+Dr+Lost+City+WV+26810">709 Wildlife Dr, Lost City, WV 26810</a></div>
+      <div><b>Stay</b>3 bed, 3.5 bath log cabin, sleeps 10</div>
+    </div>
+  </div></div>
+</header>
+
+<nav aria-label="Sections"><div class="inner">
+  <button type="button" data-target="basics">Basics</button>
+  <button type="button" data-target="sunday">Sun</button>
+  <button type="button" data-target="monday">Mon</button>
+  <button type="button" data-target="tuesday">Tue</button>
+  <button type="button" data-target="wednesday">Wed</button>
+  <button type="button" data-target="food">Food</button>
+  <button type="button" data-target="optional">Extras</button>
+  <button type="button" data-target="trail">Trail</button>
+  <button type="button" data-target="logistics">Logistics</button>
+</div></nav>
+
+<main>
+
+<section id="basics">
+  <h2>The basics</h2>
+  <p class="lead">Three nights in a private log cabin in the Lost River Valley of West Virginia, Sunday November 15 through Wednesday November 18. The itinerary is built around rest: unhurried mornings, one hike, two dinners out, good drinks, and the hot tub every evening.</p>
+  <figure><img src="exterior.jpg" alt="The cabin from the back lawn: two levels, wraparound deck, screened porch on the right"><figcaption>The cabin from the back lawn. <a href="https://www.airbnb.com/rooms/1317487519438207661">The Retreat at Lost River Valley on Airbnb</a></figcaption></figure>
+  <div class="tw"><table class="wrap two">
+    <tr><td>Cabin</td><td><a href="https://www.airbnb.com/rooms/1317487519438207661">The Retreat at Lost River Valley</a>, <a href="https://www.google.com/maps/search/?api=1&amp;query=709+Wildlife+Dr+Lost+City+WV+26810">709 Wildlife Dr, Lost City, WV 26810</a>. 3 bedrooms (king, queen, two doubles) plus a loft bed, 3.5 baths, each bedroom with its own bathroom and heated floors. Sleeps 10. Rated 5.0 on 59 reviews, Superhost.</td></tr>
+    <tr><td>Why this one</td><td>Private hot tub open year-round, fire pit with firewood included, screened porch, full kitchen, EV charger, pet-friendly. Fully private property.</td></tr>
+    <tr><td>Drive from Cleveland</td><td>About 5.5 to 6 hours, roughly 350 miles. Lost City is roughly 2.5 hours west of DC, which is also the nearest big airport (IAD) if anyone flies.</td></tr>
+    <tr><td>Weather to expect</td><td>Mid-November in the valley runs roughly 30s at night, 50s by day. Layers, a real jacket, and boots for the hike.</td></tr>
+    <tr><td>Cell service</td><td>Spotty in the valley. Download maps and playlists before you leave.</td></tr>
+  </table></div>
+  <p><strong>Everyone packs:</strong> hiking boots, warm layers, swimsuit for the hot tub, a bottle or two for the cabin bar, a party game or deck of cards.</p>
+</section>
+
+<section id="sunday">
+  <div class="day"><h2>Sunday</h2><span class="date">Nov 15</span></div>
+  <p class="sub">Get there, get in the hot tub</p>
+  <p class="lead">Sunday is a travel day: the drive down, a grocery stop before the valley, and a quiet first evening at the cabin with dinner cooked in.</p>
+  <figure><img src="firepit.jpg" alt="The fire pit and Adirondack chairs behind the cabin"><figcaption>The fire pit behind the cabin, firewood included.</figcaption></figure>
+  <div class="tw"><table class="sched">
+    <tr><th>Time</th><th>Plan</th></tr>
+    <tr><td>9:00 am</td><td>Leave Cleveland. Road snacks, coffee, a shared playlist.</td></tr>
+    <tr><td>2:30 pm</td><td>Grocery run in Moorefield (<a href="https://www.google.com/maps/search/?api=1&amp;query=Walmart+Moorefield+WV">Walmart on US-220</a>), the last real store before the valley. Sunday dinner, three breakfasts, cabin bar supplies, ice. Firewood is already covered.</td></tr>
+    <tr><td>3:30 pm</td><td>Check in. Claim rooms: king, queen, the two doubles, or the loft. Jake's dog is coming.</td></tr>
+    <tr><td>4:00 pm</td><td>Hot tub for whoever isn't cooking.</td></tr>
+    <tr><td>6:30 pm</td><td>Night in. Sunday's cook makes dinner (see Food section for the menu), the rest set the table and pour.</td></tr>
+    <tr><td>8:30 pm</td><td>Fire pit, bourbon, fun yapping.</td></tr>
+  </table></div>
+</section>
+
+<section id="monday">
+  <div class="day"><h2>Monday</h2><span class="date">Nov 16</span></div>
+  <p class="sub">The overlook hike, then wine over the mountain</p>
+  <p class="lead">Monday is an early start for the hike to Cranny Crow Overlook, back at the cabin before noon, then an evening on the Virginia side of the mountain: a winery stop, dinner at Wolf Gap Vineyard, and a brewery afterward for anyone still going.</p>
+  <figure><img src="cranny.jpg" alt="The November view from Cranny Crow Overlook"><figcaption>Cranny Crow Overlook in November.</figcaption></figure>
+  <div class="tw"><table class="sched">
+    <tr><th>Time</th><th>Plan</th></tr>
+    <tr><td>7:30 am</td><td>Up. Quick breakfast at the cabin, coffee to go.</td></tr>
+    <tr><td>8:30 am</td><td>Leave for <a href="https://wvstateparks.com/parks/lost-river-state-park/trails/">Lost River State Park</a>, 20 minutes south in Mathias. Park at the horse stables.</td></tr>
+    <tr><td>8:50 am</td><td>Start up the White Oak Trail to Cranny Crow Overlook: 3.7 miles round trip, about 950 ft of climb. Full directions in the Trail section.</td></tr>
+    <tr><td>10:05 am</td><td>Overlook. Rock ledge, 270-degree view across five counties, the Almost Heaven swing for the birthday photo. Morning light on the ridges and often fog in the valley below. It gets windy up top, so bring the jacket.</td></tr>
+    <tr><td>11:25 am</td><td>Back at the cabin. Shower, change, lunch from the groceries, hot tub if there's time.</td></tr>
+    <tr><td>3:00 pm</td><td>Drive over Wolf Gap into Virginia, about 45 minutes to Mt. Jackson. First stop: <a href="https://www.caveridge.com/visitus">Cave Ridge Vineyard</a>, open Sunday to Thursday noon to 6 with a kitchen until 5. (Shenandoah Vineyards is closed Monday and Tuesday, so it is out.)</td></tr>
+    <tr><td>4:30 pm</td><td>Dinner at <a href="https://www.wolfgapvineyard.com/">Wolf Gap Vineyard</a>, Edinburg, VA. Tasting room with mountain views, open daily noon to 6, food menu on site.</td></tr>
+    <tr><td>6:30 pm</td><td>Optional last stop: <a href="https://www.google.com/maps/search/?api=1&amp;query=Woodstock+Brewhouse+Woodstock+VA">Woodstock Brewhouse</a>, 15 minutes south, for a beer and dessert if anyone wants one. Open Monday 11:30 am to 8 pm, kitchen 7 days. Otherwise straight back.</td></tr>
+    <tr><td>8:00 pm</td><td>Cabin. Hot tub and the fire pit.</td></tr>
+  </table></div>
+  <h3>If the wineries fall through (hours, weather, energy)</h3>
+  <div class="tw"><table class="wrap">
+    <tr><th>Option</th><th>From cabin</th><th>What it is</th></tr>
+    <tr><td>Eat in</td><td>0</td><td>A second cook takes the kitchen. Tacos, a big pasta, or steaks on the grill if the cabin has one. Cheapest option.</td></tr>
+    <tr><td><a href="https://www.lostrivergrill.com/">Lost River Grill</a></td><td>5 min</td><td>Burgers, meatloaf, seafood specials, full bar. Mon 4 to 9.</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Lost+and+Found+Pizza+Mathias+WV">Lost &amp; Found Pizza</a>, Mathias</td><td>20 min</td><td>Wood-fired pizza right outside the state park, on the way back from the hike. Listed hours Mon to Sat 11 to 9, Sun 11 to 8; dog-friendly patio.</td></tr>
+    <tr><td>Downtown Harrisonburg, VA</td><td>50 min</td><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Local+Chop+and+Grill+House+Harrisonburg+VA">Local Chop &amp; Grill House</a> for steaks, <a href="https://www.google.com/maps/search/?api=1&amp;query=Clementine+Cafe+Harrisonburg+VA">Clementine</a> for upscale casual (Local Chop is Mon to Sat 4:30 to 8:30, closed Sunday), <a href="https://www.google.com/maps/search/?api=1&amp;query=Pale+Fire+Brewing+Harrisonburg+VA">Pale Fire</a> or <a href="https://www.google.com/maps/search/?api=1&amp;query=Brothers+Craft+Brewing+Harrisonburg+VA">Brothers</a> first. Needs a reservation and a designated driver.</td></tr>
+  </table></div>
+  <p><strong>Easier hike:</strong> Howard Lick Trail in the same park is 1.25 miles and flat, following the creek. Still pretty, no climb.</p>
+</section>
+
+<section id="tuesday">
+  <div class="day"><h2>Tuesday</h2><span class="date">Nov 17</span></div>
+  <p class="sub">Birthday dinner, stay in the valley</p>
+  <p class="lead">Tuesday stays close to the cabin: a relaxed day, dinner at Lost River Grill five minutes away, drinks in the lounge afterward, and the rest of the evening at the hot tub and fire pit.</p>
+  <figure><img src="hottub.jpg" alt="The hot tub on the back deck"><figcaption>The hot tub on the back deck.</figcaption></figure>
+  <div class="tw"><table class="sched">
+    <tr><th>Time</th><th>Plan</th></tr>
+    <tr><td>Morning</td><td>Sleep in. Birthday breakfast at the cabin, mimosas on the porch.</td></tr>
+    <tr><td>12:00 pm</td><td>Optional short outing from the activities list below.</td></tr>
+    <tr><td>3:00 pm</td><td>Hot tub, cards, drinks at the cabin.</td></tr>
+    <tr><td>6:30 pm</td><td>Birthday dinner at the <a href="https://www.lostrivergrill.com/">Lost River Grill</a>, 8079 WV-259, 5 minutes from the cabin. Hand-cut steaks, seafood special, cream pies for dessert. Open Tuesday noon to 9.</td></tr>
+    <tr><td>8:30 pm</td><td>After-dinner drinks in Lost River Grill's lounge (TK's: fireplace, sofa, martinis) until it closes at 9, then back to the cabin.</td></tr>
+    <tr><td>10:00 pm</td><td>Back to the cabin. Hot tub, fire pit, drinks.</td></tr>
+  </table></div>
+  <p><strong>If we want a bigger night:</strong> downtown Harrisonburg, VA is 50 minutes south with breweries (<a href="https://www.google.com/maps/search/?api=1&amp;query=Pale+Fire+Brewing+Harrisonburg+VA">Pale Fire</a>, <a href="https://www.google.com/maps/search/?api=1&amp;query=Brothers+Craft+Brewing+Harrisonburg+VA">Brothers</a>) and a real dinner scene (<a href="https://www.google.com/maps/search/?api=1&amp;query=Local+Chop+and+Grill+House+Harrisonburg+VA">Local Chop &amp; Grill House</a>, <a href="https://www.google.com/maps/search/?api=1&amp;query=Clementine+Cafe+Harrisonburg+VA">Clementine</a>). Axe throwing at <a href="https://www.google.com/maps/search/?api=1&amp;query=Beards+and+Broads+Axe+Throwing+Broadway+VA">Beards &amp; Broads</a> in Broadway, VA is on the way. A designated driver is needed for the drive back.</p>
+</section>
+
+<section id="wednesday">
+  <div class="day"><h2>Wednesday</h2><span class="date">Nov 18</span></div>
+  <p class="sub">Breakfast and the drive home</p>
+  <p class="lead">Wednesday is checkout, a diner breakfast on the way out of the valley, and the drive home, arriving in Cleveland by late afternoon.</p>
+  <figure><img src="porch.jpg" alt="The screened porch"><figcaption>The screened porch.</figcaption></figure>
+  <div class="tw"><table class="sched">
+    <tr><th>Time</th><th>Plan</th></tr>
+    <tr><td>8:00 am</td><td>Pack, strip beds if the host asks, last hot tub for whoever is up.</td></tr>
+    <tr><td>9:00 am</td><td>Breakfast at the <a href="https://www.google.com/maps/search/?api=1&amp;query=Kac-Ka-Pon+Restaurant+Wardensville+WV">Kac-Ka-Pon Restaurant</a>, 395 E Main St, Wardensville, 25 minutes north and on the way out. Old-school WV diner, biscuits and open-faced roast beef, open Wednesday 7 am to 7 pm, closed Sunday to Tuesday. Backup: breakfast at the cabin with whatever is left.</td></tr>
+    <tr><td>10:00 am</td><td>Leave. Lost City to Cleveland is about 5.5 to 6 hours, home by late afternoon.</td></tr>
+  </table></div>
+</section>
+
+<section id="food">
+  <h2>Food, drinks, and backup ideas</h2>
+  <p class="lead">Sunday dinner is cooked at the cabin, Monday is dinner at Wolf Gap Vineyard, Tuesday is the birthday dinner at Lost River Grill, and every breakfast is at the cabin. The grocery list should be divided ahead of time so nothing is duplicated or forgotten.</p>
+  <figure><img src="wolfgap.jpg" alt="A toast on the deck at Wolf Gap Vineyard with the Shenandoah ridges behind"><figcaption>Wolf Gap Vineyard, Monday's dinner stop.</figcaption></figure>
+  <div class="tw"><table class="wrap two">
+    <tr><th>Meal</th><th>Plan</th></tr>
+    <tr><td>Sunday dinner</td><td>To be decided.</td></tr>
+    <tr><td>Breakfasts</td><td>Eggs, bacon, bagels, fruit, coffee.</td></tr>
+    <tr><td>Cabin bar</td><td>Everyone brings one bottle and owns one cocktail. Pick up a local bottle on the way: Elkhorn Mountain Distillery moonshine from Moorefield shows up on menus all over the valley. Mixers, ice, and limes go on the grocery list.</td></tr>
+    <tr><td>Fire pit</td><td>Bourbon and fun yapping.</td></tr>
+  </table></div>
+  <h3>Where to drink</h3>
+  <p>The valley has one bar open midweek; the breweries and tasting rooms across the mountain in Virginia are the options for a longer outing.</p>
+  <div class="tw"><table class="wrap">
+    <tr><th>Bar</th><th>What it is</th><th>Open on our dates</th><th>From cabin</th></tr>
+    <tr><td><a href="https://www.lostrivergrill.com/">Lost River Grill lounge</a>, 8079 WV-259, Lost City</td><td>TK's lounge: full bar, martinis, a sofa in front of the fireplace. Not a gay bar, but the DC crowd fills it on weekends and the owners name LGBT travelers on their site.</td><td>Mon 4 to 9, Tue 12 to 9, Wed 4 to 9</td><td>5 min</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Swover+Creek+Farms+Brewery+Edinburg+VA">Swover Creek Farms &amp; Brewery</a>, Edinburg, VA</td><td>Farm brewery with a kitchen, disc golf, and a dog park.</td><td>Closed Mon to Wed. Thu 4 to 8, Fri and Sat 12 to 8, Sun 12 to 7</td><td>45 min</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Woodstock+Brewhouse+Woodstock+VA">Woodstock Brewhouse</a>, 123 E Court St, Woodstock, VA</td><td>Downtown brewery with a full gastropub menu; also pours Muse and Cave Ridge wine.</td><td>Mon 11:30 to 8, Tue and Wed 4 to 8, Thu 4 to 10, Fri and Sat 11:30 to 10, Sun 11:30 to 8</td><td>50 min</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Wolf+Gap+Vineyard+Edinburg+VA">Wolf Gap Vineyard</a>, Edinburg, VA</td><td>First tasting room over the mountain, mountain views, closest wine to the cabin.</td><td>Daily noon to 6; winter hours may differ, call</td><td>40 min</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Muse+Vineyards+Woodstock+VA">Muse Vineyards</a>, Woodstock, VA</td><td>Polished estate winery, often live music on weekends.</td><td>Closed Mon to Thu. Fri to Sun noon to 6</td><td>50 min</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Pale+Fire+Brewing+Harrisonburg+VA">Pale Fire Brewing</a> and <a href="https://www.google.com/maps/search/?api=1&amp;query=Brothers+Craft+Brewing+Harrisonburg+VA">Brothers Craft Brewing</a>, Harrisonburg, VA</td><td>Two downtown taprooms a few blocks apart; Pale Fire's kitchen opens at 4. Pair with a Harrisonburg dinner.</td><td>Pale Fire Mon and Tue noon to 10, Wed and Thu noon to 11, Fri and Sat noon to midnight</td><td>50 min</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=West-Whitehill+Winery+Moorefield+WV">West-Whitehill Winery</a> and <a href="https://www.google.com/maps/search/?api=1&amp;query=Elkhorn+Mountain+Distillery+Moorefield+WV">Elkhorn Mountain Distillery</a>, Moorefield, WV</td><td>Small family winery and the local moonshine maker a few minutes apart, on the same road as the grocery store.</td><td>Call ahead</td><td>35 min</td></tr>
+  </table></div>
+  <h3>Swap-ins if plans change</h3>
+  <ul>
+    <li>Seneca Rocks, 75 minutes west: a 1.5-mile switchback trail to a viewing platform on the rock fin, the signature WV photo.</li>
+    <li>Dolly Sods Wilderness, 90 minutes: high-plateau tundra that looks like Canada. Only if the roads are clear; it closes with snow.</li>
+    <li>Smoke Hole Caverns, 60 minutes: guided cave tour, 56 degrees inside, open year-round.</li>
+    <li>Rainy day: Lost River Trading Post browse, then a long lunch at Lost River Grill, then games at the cabin.</li>
+  </ul>
+</section>
+
+<section id="optional">
+  <h2>Other optional activities</h2>
+  <p class="lead">None of the following is scheduled; it is a menu for free time. Everything is within an hour of the cabin. The Virginia side, over Wolf Gap into Edinburg and Woodstock, has the wineries and breweries; the West Virginia side has the hikes. Midweek hours in November are limited everywhere, so confirm by phone before driving.</p>
+  <figure><img src="seneca.jpg" alt="Seneca Rocks"><figcaption>Seneca Rocks, 75 minutes west.</figcaption></figure>
+  <h3>Wineries, breweries, distillery</h3>
+  <div class="tw"><table class="wrap">
+    <tr><th>Place</th><th>Where</th><th>From cabin</th><th>Notes</th></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Swover+Creek+Farms+Brewery+Edinburg+VA">Swover Creek Farms &amp; Brewery</a></td><td>Edinburg, VA</td><td>45 min</td><td>Farm brewery with a scratch kitchen, disc golf, and a dog park. Closed Monday to Wednesday, so it only works on a future trip.</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Wolf+Gap+Vineyard+Edinburg+VA">Wolf Gap Vineyard</a></td><td>Edinburg, VA</td><td>40 min</td><td>First winery over the mountain from the cabin, mountain views from the tasting room.</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Muse+Vineyards+Woodstock+VA">Muse Vineyards</a></td><td>Woodstock, VA</td><td>50 min</td><td>The polished one: estate wines, often live music. Closed Monday to Thursday, so not on our dates.</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Woodstock+Brewhouse+Woodstock+VA">Woodstock Brewhouse</a></td><td>Woodstock, VA</td><td>50 min</td><td>Brewery plus full gastropub menu downtown, pours Muse and Cave Ridge wine too. Good lunch stop.</td></tr>
+    <tr><td><a href="https://www.caveridge.com/visitus">Cave Ridge Vineyard</a></td><td>Mt. Jackson, VA</td><td>45 min</td><td>Estate winery with a kitchen. Sun to Thu noon to 6, Fri and Sat to 7. The one winery besides Wolf Gap that is open Monday.</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Shenandoah+Vineyards+Edinburg+VA">Shenandoah Vineyards</a></td><td>Edinburg, VA</td><td>45 min</td><td>Virginia's oldest winery in the valley. Wed to Sun 11 to 5, closed Mon and Tue, so only possible Sunday on the drive in.</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=West-Whitehill+Winery+Moorefield+WV">West-Whitehill Winery</a></td><td>Moorefield, WV</td><td>35 min</td><td>Small family winery on US-220. Modest, close, pairs with the grocery run.</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Elkhorn+Mountain+Distillery+Moorefield+WV">Elkhorn Mountain Distillery</a></td><td>Moorefield, WV</td><td>35 min</td><td>The local moonshine on every valley menu. Hours vary, call (they are a few minutes from West-Whitehill).</td></tr>
+  </table></div>
+  <h3>Hiking and outdoors</h3>
+  <div class="tw"><table class="wrap">
+    <tr><th>Activity</th><th>From cabin</th><th>Notes</th></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Wolf+Gap+Recreation+Area+Big+Schloss+trailhead">Big Schloss, Wolf Gap Recreation Area</a></td><td>30 min</td><td>4.4 miles out and back, rock-fin summit with the best view in the area, on the way to the Virginia wineries.</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Trout+Pond+Recreation+Area+WV">Trout Pond Recreation Area</a></td><td>20 min</td><td>WV's only natural lake, flat loop walk, picnic tables. Low-effort.</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Seneca+Rocks+Discovery+Center+WV">Seneca Rocks</a></td><td>75 min</td><td>1.5-mile switchback trail to the platform on the rock fin, the signature WV photo.</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Dolly+Sods+Wilderness+Bear+Rocks+Preserve">Dolly Sods Wilderness</a></td><td>90 min</td><td>High-plateau tundra. Only if roads are clear; it closes with snow.</td></tr>
+    <tr><td><a href="https://wvstateparks.com/parks/lost-river-state-park/">Horseback riding, Lost River State Park</a></td><td>20 min</td><td>Guided rides from the stables; the season usually ends in October, so call the park at (304) 897-5372 before counting on it.</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Smoke+Hole+Caverns+WV">Smoke Hole Caverns</a></td><td>60 min</td><td>Guided cave tour, 56 degrees year-round, a rainy-day option on the way to Seneca Rocks.</td></tr>
+    <tr><td><a href="https://wvstateparks.com/parks/lost-river-state-park/trails/">Mountain biking, Lost River State Park</a></td><td>20 min</td><td>Several trails allow bikes. Bring your own.</td></tr>
+  </table></div>
+  <h3>Shopping and sightseeing</h3>
+  <div class="tw"><table class="wrap">
+    <tr><th>Place</th><th>From cabin</th><th>Notes</th></tr>
+    <tr><td><a href="https://www.lostrivertradingpost.com/">Lost River Trading Post &amp; Grasshopper Gallery</a>, Wardensville</td><td>25 min</td><td>Antiques, local art, cabin goods, scratch-baked lunch. Open daily 9 to 5.</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Lost+River+Artisans+Cooperative+WV">Lost River Artisans Cooperative</a>, Lost River</td><td>10 min</td><td>Local craft co-op on WV-259. Weekend-only most of the year; assume closed midweek unless a call says otherwise.</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Wardensville+Garden+Market+WV">Wardensville Garden Market</a></td><td>25 min</td><td>Farm market, bakery, and cafe run as a youth job program. Good coffee stop. Check winter hours.</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Court+Street+Woodstock+VA">Downtown Woodstock, VA</a></td><td>50 min</td><td>Court Street shops and the Brewhouse, pair with the wineries.</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Lost+River+State+Park+Mathias+WV">Lost River State Park overlooks by car</a></td><td>20 min</td><td>Drive to the picnic areas and the historic Lee Cabin without hiking.</td></tr>
+  </table></div>
+  <h3>Relaxing</h3>
+  <div class="tw"><table class="wrap two">
+    <tr><th>Idea</th><th>Notes</th></tr>
+    <tr><td>Hot tub and screened porch</td><td>The default. Everything else is optional.</td></tr>
+    <tr><td><a href="https://www.google.com/maps/search/?api=1&amp;query=Lost+River+Yoga+Barn+WV">Lost River Yoga Barn</a></td><td>The red barn on WV-259 near the General Store; check for a class.</td></tr>
+    <tr><td>Game night</td><td>Bring cards, a couple of party games, and a speaker.</td></tr>
+    <tr><td>Cocktail competition</td><td>Everyone makes their signature drink, blind taste test.</td></tr>
+    <tr><td>Bingo or trivia</td><td>Bring a speaker and a playlist. Someone writes the questions on the drive down.</td></tr>
+  </table></div>
+</section>
+
+<section id="trail">
+  <h2>The hike: Cranny Crow Overlook</h2>
+  <p class="lead">One trail up, the same trail down. 3.7 miles round trip, about 950 feet of climb, 2 to 2.5 hours at a group pace. Orange blazes the whole way up, then a short yellow spur to the overlook.</p>
+  <div class="tw"><table class="wrap two">
+    <tr><td>Park here</td><td><a href="https://www.google.com/maps/search/?api=1&amp;query=38.8859,-78.9047">Horse stables lot, Dove Hollow Road, Lost River State Park</a>. From the cabin take WV-259 south to Mathias, turn right onto Howards Lick Road (CR 12) at the park sign, then follow signs for the stables. About 20 minutes. Park address for GPS: <a href="https://www.google.com/maps/search/?api=1&amp;query=321+Park+Dr+Mathias+WV+26812">321 Park Dr, Mathias, WV 26812</a>.</td></tr>
+    <tr><td>Trail map</td><td><a href="https://wvstateparks.com/wp-content/uploads/2025/06/2024.07.03_WVSP_LostRiver_Map_FINAL.pdf">Official park map (PDF)</a>. Download it before you leave the cabin; there is no signal on the ridge. The park office at the entrance also has paper copies.</td></tr>
+    <tr><td>Blazes</td><td>Orange = White Oak Trail (the climb). Yellow = Millers Rock Trail (the last few hundred yards to the overlook). If you see blue, you are on Howard Lick and have gone the wrong way.</td></tr>
+    <tr><td>Footing</td><td>Dirt horse trail, rocky in places, with switchbacks. Expect horse droppings. Leaves are down in November, so the trail is obvious but can be slick after rain. Boots, not sneakers.</td></tr>
+  </table></div>
+  <h3>Turn by turn</h3>
+  <div class="tw"><table class="sched steps">
+    <tr><th>Step</th><th>What to do</th></tr>
+    <tr><td>0.0 mi</td><td>From the stables lot, find the orange-blazed <strong>White Oak Trail</strong> sign at the edge of the riding area and start up. It climbs from the first step.</td></tr>
+    <tr><td>0.3 mi</td><td>Pass a small shelter with a partial view. Keep climbing on orange.</td></tr>
+    <tr><td>0.3 to 1.5 mi</td><td>A series of switchbacks up the side of Big Ridge. This is most of the 950 feet. Take it slow; the grade eases near the top.</td></tr>
+    <tr><td>1.5 mi</td><td>Junction on the ridge with the yellow-blazed <strong>Millers Rock Trail</strong>. <strong>Bear right</strong> onto yellow.</td></tr>
+    <tr><td>1.7 mi</td><td><strong>Cranny Crow Overlook</strong>, about 3,200 feet. A stone overlook on a rock ledge facing south and west across the valley, five counties on a clear day, and the Almost Heaven swing for the photo. No railing on the rocks beyond the overlook, so stay on the built part.</td></tr>
+    <tr><td>Back</td><td>Retrace: yellow back to the junction, <strong>bear left</strong> onto orange, and follow the switchbacks down to the stables. Do not take any trail that drops off the ridge to the right; that is the long loop toward Howard Lick.</td></tr>
+  </table></div>
+  <div class="note"><b>Timing for Monday:</b> leave the cabin by 8:30, start walking at 8:50, top by 10:05, down by 11:05, back at the cabin around 11:25. Morning light is on the ridges and there is often fog in the valley below you until 10, which is the best version of this view.</div>
+  <p><strong>If anyone wants the flat option:</strong> Howard Lick Trail, blue blazes, 1.25 miles along the creek from the lot near Cabin 3. Meet back at the stables.</p>
+</section>
+
+<section id="logistics">
+  <h2>Logistics</h2>
+  <p class="lead">Driving times from the cabin are below. Cell service in the valley is unreliable, so save this page before arriving.</p>
+  <figure class="wide"><img src="aerial.jpg" alt="The cabin from above, wooded on all sides"><figcaption>The cabin from above.</figcaption></figure>
+  <div class="tw dist"><table>
+    <tr><th>Place</th><th>From the cabin</th></tr>
+    <tr><td>Lost River Grill</td><td>5 min</td></tr>
+    <tr><td>Lost River State Park trailhead</td><td>20 min</td></tr>
+    <tr><td>Trout Pond Recreation Area</td><td>20 min</td></tr>
+    <tr><td>Wardensville (Trading Post, Kac-Ka-Pon)</td><td>25 min</td></tr>
+    <tr><td>Moorefield (gas, Walmart, Elkhorn distillery)</td><td>35 min</td></tr>
+    <tr><td>Wolf Gap Vineyard, Edinburg, VA</td><td>40 min</td></tr>
+    <tr><td>Harrisonburg, VA (dinner, breweries)</td><td>50 min</td></tr>
+    <tr><td>Seneca Rocks</td><td>75 min</td></tr>
+    <tr><td>Cleveland</td><td>5.5 to 6 hr</td></tr>
+  </table></div>
+  <h3>Cost per person</h3>
+  <p>Expect $200 to $400 per person with four attending, less with a larger group. The cabin is the fixed cost; food varies with how many evenings the group eats out.</p>
+  <div class="tw"><table class="cost wrap">
+    <tr><th>Item</th><th>Per person</th><th>Notes</th></tr>
+    <tr><td>Cabin, 3 nights</td><td>$200 to $250</td><td>At 4 people. Drops with a 5th or 6th; the place sleeps 10. Paid to Jake up front.</td></tr>
+    <tr><td>Groceries and cabin bar</td><td>$50 to $70</td><td>Sunday dinner, 3 breakfasts, snacks, mixers, ice. Everyone also brings one bottle.</td></tr>
+    <tr><td>Monday dinner</td><td>$20 to $70</td><td>Wolf Gap tasting plus food and a second winery stop, roughly $50 to $70; $20 if the backup is cooking in.</td></tr>
+    <tr><td>Tuesday birthday dinner</td><td>$45 to $70</td><td>Lost River Grill with drinks and pie.</td></tr>
+    <tr><td>Wednesday breakfast</td><td>$15</td><td>Kac-Ka-Pon.</td></tr>
+    <tr><td>Gas</td><td>$30 to $40</td><td>Split per car, roughly 700 miles round trip.</td></tr>
+    <tr class="total"><td>Total</td><td>$200 to $400</td><td>Low end is cooking Monday with 4 people; high end is a night out.</td></tr>
+  </table></div>
+</section>
+
+</main>
+<footer>Every place name is a live link to its site or Google Maps. Hours in the valley shift midweek in November, so call before driving anywhere far.</footer>
+
+<script>
+(function(){
+  document.querySelectorAll('table').forEach(function(t){var hs=[].map.call(t.querySelectorAll('tr:first-child th'),function(th){return th.textContent.trim();});if(!hs.length)return;t.querySelectorAll('tr').forEach(function(tr){[].forEach.call(tr.children,function(td,i){if(td.tagName==='TD'&&hs[i])td.setAttribute('data-label',hs[i]);});});});
+  var nav=document.querySelector('nav');
+  var btns=[].slice.call(nav.querySelectorAll('button'));
+  var secs=btns.map(function(b){return document.getElementById(b.getAttribute('data-target'));});
+  var lock=0;
+  function setOn(id){btns.forEach(function(b){b.classList.toggle('on',b.getAttribute('data-target')===id);});
+    var on=nav.querySelector('button.on'); if(on&&on.scrollIntoView){on.scrollIntoView({block:'nearest',inline:'center'});}}
+  function go(id){var el=document.getElementById(id); if(!el)return;
+    var y=el.getBoundingClientRect().top+(window.pageYOffset||document.documentElement.scrollTop)-nav.offsetHeight-6;
+    lock=Date.now()+700; setOn(id);
+    try{window.scrollTo({top:y,behavior:'smooth'});}catch(e){window.scrollTo(0,y);}
+    try{history.replaceState(null,'','#'+id);}catch(e){}}
+  btns.forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();go(b.getAttribute('data-target'));});});
+  function track(){if(Date.now()<lock)return;var line=nav.offsetHeight+20,cur=secs[0];
+    secs.forEach(function(s){if(s&&s.getBoundingClientRect().top<=line)cur=s;});
+    if(cur)setOn(cur.id);}
+  window.addEventListener('scroll',track,{passive:true});
+  var h=location.hash.replace('#',''); if(h&&document.getElementById(h)){setTimeout(function(){go(h);},50);} else setOn('basics');
+})();
+</script>
+
+</body>
+</html>
