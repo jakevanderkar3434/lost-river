@@ -79,6 +79,27 @@ table.cost td:nth-child(2){font-variant-numeric:tabular-nums;white-space:nowrap}
 tr.total td{font-weight:600;background:var(--moss)}
 .note{background:var(--moss);border-radius:var(--r);padding:14px 16px;max-width:72ch;margin:0 0 14px}
 .note b{color:var(--accent)}
+.cta{display:inline-block;background:var(--accent);color:var(--pine-ink);border:0;border-radius:999px;padding:10px 18px;font-weight:600;font-size:14px;margin-top:10px}
+.cta:hover{filter:brightness(1.08);border:0}
+/* forecast cards */
+.wx-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 10px}
+.wx{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 14px 12px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.wx.hike{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.wx-day{font-weight:600;font-size:15px;display:flex;justify-content:space-between;align-items:baseline}
+.wx-day span{font-size:12px;color:var(--muted);font-weight:500}
+.wx-ico{color:var(--accent);height:40px;display:flex;align-items:center}
+.wx-ico svg{width:40px;height:40px}
+.wx-cond{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.wx-temps{display:flex;align-items:baseline;gap:8px;font-variant-numeric:tabular-nums}
+.wx-temps b{font-family:var(--display);font-weight:500;font-size:34px;line-height:1;letter-spacing:-.02em}
+.wx-temps span{font-size:15px;color:var(--muted)}
+.wx-bar{position:relative;height:6px;border-radius:3px;background:var(--moss);margin:4px 0 2px}
+.wx-bar i{position:absolute;top:0;bottom:0;border-radius:3px;background:linear-gradient(90deg,#7fa7c9,var(--accent) 45%,#d9a441)}
+.wx-note{font-size:12.5px;color:var(--muted);line-height:1.4;margin-top:auto}
+.wx-foot{font-size:12px;color:var(--muted);margin:0 0 6px}
+@media (max-width:760px){.wx-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:380px){.wx-grid{grid-template-columns:1fr}}
+
 footer{max-width:1040px;margin:0 auto;padding-block:16px 32px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
@@ -116,7 +137,6 @@ footer{max-width:1040px;margin:0 auto;padding-block:16px 32px;padding-left:max(1
   .tw.dist td+td{font-variant-numeric:tabular-nums;color:var(--muted);text-align:right;white-space:nowrap!important}
 }
 </style>
-
 </head>
 <body>
 <header class="hero">
@@ -154,23 +174,69 @@ footer{max-width:1040px;margin:0 auto;padding-block:16px 32px;padding-left:max(1
   <div class="tw"><table class="wrap two">
     <tr><td>Cabin</td><td><a href="https://www.airbnb.com/rooms/1317487519438207661">The Retreat at Lost River Valley</a>, <a href="https://www.google.com/maps/search/?api=1&amp;query=709+Wildlife+Dr+Lost+City+WV+26810">709 Wildlife Dr, Lost City, WV 26810</a>. 3 bedrooms (king, queen, two doubles) plus a loft bed, 3.5 baths, each bedroom with its own bathroom and heated floors. Sleeps 10. Rated 5.0 on 59 reviews, Superhost.</td></tr>
     <tr><td>Why this one</td><td>Private hot tub open year-round, fire pit with firewood included, screened porch, full kitchen, EV charger, pet-friendly. Fully private property.</td></tr>
-    <tr><td>Drive from Cleveland</td><td>About 5.5 to 6 hours, roughly 350 miles. Lost City is roughly 2.5 hours west of DC, which is also the nearest big airport (IAD) if anyone flies.</td></tr>
-    <tr><td>Weather to expect</td><td>Mid-November in the valley runs roughly 30s at night, 50s by day. Layers, a real jacket, and boots for the hike.</td></tr>
-    <tr><td>Cell service</td><td>Spotty in the valley. Download maps and playlists before you leave.</td></tr>
+    <tr><td>Drive from Cleveland</td><td>About 5.5 to 6 hours, roughly 350 miles. Lost City is roughly 2.5 hours west of DC.</td></tr>
+    <tr><td>Weather to expect</td><td>Cold nights, mild afternoons, dry all four days. Lows around 30°F every night, highs climbing from the mid 40s Sunday to about 60 by Wednesday. Forecast below.</td></tr>
+    <tr><td>Cell service</td><td>Spotty in the valley. Please note, cellular service is limited for the last ~15 minutes of the drive into the cabin, so load directions and playlists before Moorefield.</td></tr>
   </table></div>
-  <p><strong>Everyone packs:</strong> hiking boots, warm layers, swimsuit for the hot tub, a bottle or two for the cabin bar, a party game or deck of cards.</p>
+  <h3>Grocery requests</h3>
+  <div class="note"><b>One shopping run:</b> Sunday at 2:30 at the Walmart in Moorefield, on the way in. Anything you want at the cabin should be on the list by Saturday night. Submit the form as many times as you remember things.<br><a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSeMi99rIDF6S0FOJN5JNXTZwzOHLc7QtsjLk4pfB_HC2D4HUg/viewform" target="_blank" rel="noopener">Request a grocery item</a></div>
+  <h3>Forecast</h3>
+  <div class="wx-grid">
+    <div class="wx">
+      <div class="wx-day">Sun<span>Nov 15</span></div>
+      <div class="wx-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="9" r="3.6" fill="currentColor" opacity=".9"/><g stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".9"><path d="M9 2.5v1.6M2.5 9h1.6M4.4 4.4l1.1 1.1M13.6 4.4l-1.1 1.1"/></g><path d="M8.5 20.5h9.3a3.7 3.7 0 0 0 .4-7.4 5 5 0 0 0-9.6-1.2A4.3 4.3 0 0 0 8.5 20.5z" fill="var(--surface)" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+      <div class="wx-cond">Partly cloudy</div>
+      <div class="wx-temps"><b>44°</b><span>34°</span></div>
+      <div class="wx-bar"><i style="left:22%;width:25%"></i></div>
+      <div class="wx-note">Cold first night at the fire pit. 15% chance of a flurry.</div>
+    </div>
+    <div class="wx hike">
+      <div class="wx-day">Mon<span>Nov 16</span></div>
+      <div class="wx-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></g></svg></div>
+      <div class="wx-cond">Sunny</div>
+      <div class="wx-temps"><b>50°</b><span>30°</span></div>
+      <div class="wx-bar"><i style="left:12%;width:50%"></i></div>
+      <div class="wx-note">About 30° at the trailhead at 9:20, low 40s at the overlook, windy on the ledge.</div>
+    </div>
+    <div class="wx">
+      <div class="wx-day">Tue<span>Nov 17</span></div>
+      <div class="wx-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></g></svg></div>
+      <div class="wx-cond">Sunny</div>
+      <div class="wx-temps"><b>55°</b><span>30°</span></div>
+      <div class="wx-bar"><i style="left:12%;width:62%"></i></div>
+      <div class="wx-note">Frost in the morning, pleasant by noon.</div>
+    </div>
+    <div class="wx">
+      <div class="wx-day">Wed<span>Nov 18</span></div>
+      <div class="wx-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></g></svg></div>
+      <div class="wx-cond">Sunny</div>
+      <div class="wx-temps"><b>60°</b><span>31°</span></div>
+      <div class="wx-bar"><i style="left:15%;width:72%"></i></div>
+      <div class="wx-note">Warmest day, easy drive home.</div>
+    </div>
+  </div>
+  <p class="wx-foot">Highs and lows in °F, bar shows the day's range on a 25° to 65° scale. Dry all four days. Forecast as of Nov 13; check again the morning you leave.</p>
+  <h3>Packing list</h3>
+  <div class="tw"><table class="wrap two">
+    <tr><th>Category</th><th>Bring</th></tr>
+    <tr><td>Hike</td><td>Hiking boots or trail shoes with grip, a warm hat and light gloves for the 30°F start, a layer you can take off on the climb, sunglasses, a small backpack with water (1 liter each).</td></tr>
+    <tr><td>Nights outside</td><td>A real winter jacket for the fire pit and hot tub walk, a beanie, warm sweatshirt or fleece, sweatpants or joggers. It drops to freezing fast once the sun goes.</td></tr>
+    <tr><td>Hot tub</td><td>Swimsuit, flip-flops or slides for the deck, towel for hot tub.</td></tr>
+    <tr><td>Daytime and dinners</td><td>Jeans and a nice-ish shirt or sweater for Wolf Gap and Lost River Grill; neither is dressy. A light jacket for Tuesday and Wednesday afternoons.</td></tr>
+    <tr><td>Cabin</td><td>One bottle for the cabin bar, a party game or deck of cards, a Bluetooth speaker, phone charger, any medications, and a downloaded playlist and offline map since service drops before the cabin.</td></tr>
+  </table></div>
 </section>
 
 <section id="sunday">
   <div class="day"><h2>Sunday</h2><span class="date">Nov 15</span></div>
   <p class="sub">Get there, get in the hot tub</p>
-  <p class="lead">Sunday is a travel day: the drive down, a grocery stop before the valley, and a quiet first evening at the cabin with dinner cooked in.</p>
+  <p class="lead">Sunday is a travel day: the drive down, a grocery stop before the valley, and a quiet first evening at the cabin with tacos for dinner.</p>
   <figure><img src="firepit.jpg" alt="The fire pit and Adirondack chairs behind the cabin"><figcaption>The fire pit behind the cabin, firewood included.</figcaption></figure>
   <div class="tw"><table class="sched">
     <tr><th>Time</th><th>Plan</th></tr>
     <tr><td>9:00 am</td><td>Leave Cleveland. Road snacks, coffee, a shared playlist.</td></tr>
     <tr><td>2:30 pm</td><td>Grocery run in Moorefield (<a href="https://www.google.com/maps/search/?api=1&amp;query=Walmart+Moorefield+WV">Walmart on US-220</a>), the last real store before the valley. Sunday dinner, three breakfasts, cabin bar supplies, ice. Firewood is already covered.</td></tr>
-    <tr><td>3:30 pm</td><td>Check in. Claim rooms: king, queen, the two doubles, or the loft. Jake's dog is coming.</td></tr>
+    <tr><td>3:30 pm</td><td>Check in. Claim rooms: king, queen, the two doubles, or the loft. Jake's dog is coming. Please note, cellular service is limited for the last ~15 minutes of the drive into the cabin; have the address loaded before you lose signal.</td></tr>
     <tr><td>4:00 pm</td><td>Hot tub for whoever isn't cooking.</td></tr>
     <tr><td>6:30 pm</td><td>Night in. Sunday's cook makes dinner (see Food section for the menu), the rest set the table and pour.</td></tr>
     <tr><td>8:30 pm</td><td>Fire pit, bourbon, fun yapping.</td></tr>
@@ -180,15 +246,15 @@ footer{max-width:1040px;margin:0 auto;padding-block:16px 32px;padding-left:max(1
 <section id="monday">
   <div class="day"><h2>Monday</h2><span class="date">Nov 16</span></div>
   <p class="sub">The overlook hike, then wine over the mountain</p>
-  <p class="lead">Monday is an early start for the hike to Cranny Crow Overlook, back at the cabin before noon, then an evening on the Virginia side of the mountain: a winery stop, dinner at Wolf Gap Vineyard, and a brewery afterward for anyone still going.</p>
+  <p class="lead">Monday is an early start for the hike to Cranny Crow Overlook, back at the cabin by noon, then an evening on the Virginia side of the mountain: a winery stop, dinner at Wolf Gap Vineyard, and a brewery afterward for anyone still going.</p>
   <figure><img src="cranny.jpg" alt="The November view from Cranny Crow Overlook"><figcaption>Cranny Crow Overlook in November.</figcaption></figure>
   <div class="tw"><table class="sched">
     <tr><th>Time</th><th>Plan</th></tr>
-    <tr><td>7:30 am</td><td>Up. Quick breakfast at the cabin, coffee to go.</td></tr>
-    <tr><td>8:30 am</td><td>Leave for <a href="https://wvstateparks.com/parks/lost-river-state-park/trails/">Lost River State Park</a>, 20 minutes south in Mathias. Park at the horse stables.</td></tr>
-    <tr><td>8:50 am</td><td>Start up the White Oak Trail to Cranny Crow Overlook: 3.7 miles round trip, about 950 ft of climb. Full directions in the Trail section.</td></tr>
-    <tr><td>10:05 am</td><td>Overlook. Rock ledge, 270-degree view across five counties, the Almost Heaven swing for the birthday photo. Morning light on the ridges and often fog in the valley below. It gets windy up top, so bring the jacket.</td></tr>
-    <tr><td>11:25 am</td><td>Back at the cabin. Shower, change, lunch from the groceries, hot tub if there's time.</td></tr>
+    <tr><td>8:00 am</td><td>Up. Quick breakfast at the cabin, coffee to go.</td></tr>
+    <tr><td>9:00 am</td><td>Leave for <a href="https://wvstateparks.com/parks/lost-river-state-park/trails/">Lost River State Park</a>, 20 minutes south in Mathias. Park at the horse stables.</td></tr>
+    <tr><td>9:20 am</td><td>Start up the White Oak Trail to Cranny Crow Overlook: 3.7 miles round trip, about 950 ft of climb. Full directions in the Trail section.</td></tr>
+    <tr><td>10:35 am</td><td>Overlook. Rock ledge, 270-degree view across five counties, the Almost Heaven swing for the birthday photo. Morning light on the ridges and often fog in the valley below. It gets windy up top, so bring the jacket.</td></tr>
+    <tr><td>12:00 pm</td><td>Back at the cabin. Shower, change, lunch from the groceries, hot tub if there's time.</td></tr>
     <tr><td>3:00 pm</td><td>Drive over Wolf Gap into Virginia, about 45 minutes to Mt. Jackson. First stop: <a href="https://www.caveridge.com/visitus">Cave Ridge Vineyard</a>, open Sunday to Thursday noon to 6 with a kitchen until 5. (Shenandoah Vineyards is closed Monday and Tuesday, so it is out.)</td></tr>
     <tr><td>4:30 pm</td><td>Dinner at <a href="https://www.wolfgapvineyard.com/">Wolf Gap Vineyard</a>, Edinburg, VA. Tasting room with mountain views, open daily noon to 6, food menu on site.</td></tr>
     <tr><td>6:30 pm</td><td>Optional last stop: <a href="https://www.google.com/maps/search/?api=1&amp;query=Woodstock+Brewhouse+Woodstock+VA">Woodstock Brewhouse</a>, 15 minutes south, for a beer and dessert if anyone wants one. Open Monday 11:30 am to 8 pm, kitchen 7 days. Otherwise straight back.</td></tr>
@@ -224,24 +290,23 @@ footer{max-width:1040px;margin:0 auto;padding-block:16px 32px;padding-left:max(1
 
 <section id="wednesday">
   <div class="day"><h2>Wednesday</h2><span class="date">Nov 18</span></div>
-  <p class="sub">Breakfast and the drive home</p>
-  <p class="lead">Wednesday is checkout, a diner breakfast on the way out of the valley, and the drive home, arriving in Cleveland by late afternoon.</p>
+  <p class="sub">Checkout and the drive home</p>
+  <p class="lead">Wednesday is a quick morning: clean the cabin, pack the cars, and leave by 9, arriving in Cleveland by mid-afternoon.</p>
   <figure><img src="porch.jpg" alt="The screened porch"><figcaption>The screened porch.</figcaption></figure>
   <div class="tw"><table class="sched">
     <tr><th>Time</th><th>Plan</th></tr>
-    <tr><td>8:00 am</td><td>Pack, strip beds if the host asks, last hot tub for whoever is up.</td></tr>
-    <tr><td>9:00 am</td><td>Breakfast at the <a href="https://www.google.com/maps/search/?api=1&amp;query=Kac-Ka-Pon+Restaurant+Wardensville+WV">Kac-Ka-Pon Restaurant</a>, 395 E Main St, Wardensville, 25 minutes north and on the way out. Old-school WV diner, biscuits and open-faced roast beef, open Wednesday 7 am to 7 pm, closed Sunday to Tuesday. Backup: breakfast at the cabin with whatever is left.</td></tr>
-    <tr><td>10:00 am</td><td>Leave. Lost City to Cleveland is about 5.5 to 6 hours, home by late afternoon.</td></tr>
+    <tr><td>7:30 am</td><td>Up. Pack, clean the house: dishes done, trash out, hot tub cover on, beds stripped if the host asks.</td></tr>
+    <tr><td>9:00 am</td><td>Leave. Lost City to Cleveland is about 5.5 to 6 hours, home by mid-afternoon.</td></tr>
   </table></div>
 </section>
 
 <section id="food">
   <h2>Food, drinks, and backup ideas</h2>
-  <p class="lead">Sunday dinner is cooked at the cabin, Monday is dinner at Wolf Gap Vineyard, Tuesday is the birthday dinner at Lost River Grill, and every breakfast is at the cabin. The grocery list should be divided ahead of time so nothing is duplicated or forgotten.</p>
+  <p class="lead">Sunday dinner is tacos at the cabin, Monday is dinner at Wolf Gap Vineyard, Tuesday is the birthday dinner at Lost River Grill, and every breakfast is at the cabin. The grocery list should be divided ahead of time so nothing is duplicated or forgotten.</p>
   <figure><img src="wolfgap.jpg" alt="A toast on the deck at Wolf Gap Vineyard with the Shenandoah ridges behind"><figcaption>Wolf Gap Vineyard, Monday's dinner stop.</figcaption></figure>
   <div class="tw"><table class="wrap two">
     <tr><th>Meal</th><th>Plan</th></tr>
-    <tr><td>Sunday dinner</td><td>To be decided.</td></tr>
+    <tr><td>Sunday dinner</td><td>White people tacos at the cabin: ground beef, seasoning packet, hard and soft shells, shredded cheddar, lettuce, tomato, sour cream, salsa. Request extra toppings on the grocery form under The basics.</td></tr>
     <tr><td>Breakfasts</td><td>Eggs, bacon, bagels, fruit, coffee.</td></tr>
     <tr><td>Cabin bar</td><td>Everyone brings one bottle and owns one cocktail. Pick up a local bottle on the way: Elkhorn Mountain Distillery moonshine from Moorefield shows up on menus all over the valley. Mixers, ice, and limes go on the grocery list.</td></tr>
     <tr><td>Fire pit</td><td>Bourbon and fun yapping.</td></tr>
@@ -333,7 +398,7 @@ footer{max-width:1040px;margin:0 auto;padding-block:16px 32px;padding-left:max(1
     <tr><td>1.7 mi</td><td><strong>Cranny Crow Overlook</strong>, about 3,200 feet. A stone overlook on a rock ledge facing south and west across the valley, five counties on a clear day, and the Almost Heaven swing for the photo. No railing on the rocks beyond the overlook, so stay on the built part.</td></tr>
     <tr><td>Back</td><td>Retrace: yellow back to the junction, <strong>bear left</strong> onto orange, and follow the switchbacks down to the stables. Do not take any trail that drops off the ridge to the right; that is the long loop toward Howard Lick.</td></tr>
   </table></div>
-  <div class="note"><b>Timing for Monday:</b> leave the cabin by 8:30, start walking at 8:50, top by 10:05, down by 11:05, back at the cabin around 11:25. Morning light is on the ridges and there is often fog in the valley below you until 10, which is the best version of this view.</div>
+  <div class="note"><b>Timing for Monday:</b> leave the cabin by 9:00, start walking at 9:20, top by 10:35, down by 11:35, back at the cabin around noon. Morning light is on the ridges and there is often fog in the valley below until mid-morning.</div>
   <p><strong>If anyone wants the flat option:</strong> Howard Lick Trail, blue blazes, 1.25 miles along the creek from the lot near Cabin 3. Meet back at the stables.</p>
 </section>
 
@@ -352,18 +417,6 @@ footer{max-width:1040px;margin:0 auto;padding-block:16px 32px;padding-left:max(1
     <tr><td>Harrisonburg, VA (dinner, breweries)</td><td>50 min</td></tr>
     <tr><td>Seneca Rocks</td><td>75 min</td></tr>
     <tr><td>Cleveland</td><td>5.5 to 6 hr</td></tr>
-  </table></div>
-  <h3>Cost per person</h3>
-  <p>Expect $200 to $400 per person with four attending, less with a larger group. The cabin is the fixed cost; food varies with how many evenings the group eats out.</p>
-  <div class="tw"><table class="cost wrap">
-    <tr><th>Item</th><th>Per person</th><th>Notes</th></tr>
-    <tr><td>Cabin, 3 nights</td><td>$200 to $250</td><td>At 4 people. Drops with a 5th or 6th; the place sleeps 10. Paid to Jake up front.</td></tr>
-    <tr><td>Groceries and cabin bar</td><td>$50 to $70</td><td>Sunday dinner, 3 breakfasts, snacks, mixers, ice. Everyone also brings one bottle.</td></tr>
-    <tr><td>Monday dinner</td><td>$20 to $70</td><td>Wolf Gap tasting plus food and a second winery stop, roughly $50 to $70; $20 if the backup is cooking in.</td></tr>
-    <tr><td>Tuesday birthday dinner</td><td>$45 to $70</td><td>Lost River Grill with drinks and pie.</td></tr>
-    <tr><td>Wednesday breakfast</td><td>$15</td><td>Kac-Ka-Pon.</td></tr>
-    <tr><td>Gas</td><td>$30 to $40</td><td>Split per car, roughly 700 miles round trip.</td></tr>
-    <tr class="total"><td>Total</td><td>$200 to $400</td><td>Low end is cooking Monday with 4 people; high end is a night out.</td></tr>
   </table></div>
 </section>
 
